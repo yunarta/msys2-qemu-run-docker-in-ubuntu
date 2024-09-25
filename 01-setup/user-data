@@ -1,0 +1,16 @@
+#cloud-config
+users:
+  - default
+
+allow_public_ssh_keys: true
+ssh_pwauth: true
+ssh_authorized_keys: 
+ - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDLApR9Xhtjo3GmmIHblwZHRGYeXxQ7/1vwOEFRjetWkqtb0/Cm6nk4oyRhRVCLt1Tga8X51GxwwZ4LIzq1/1otVO7025rkBNco05MRoNp0cT8xSpgqzebl6CS3sfVH7exYdb0MVq3Qd5n4PuhUSWp2KZbtg7L86fVOIZQZw5LBWAuf4lFzykpxsjFC4vAL2nrIWSeRCsMYn5wSmbPqvhjthmHY+LPY7wRWKeitfHTDKv4d9dYEg/HcPCUMjGUaClE9f2Cj68PV6TcNdr6c5ww2TzUGC93tn9yvQMYfsrwIIjbQCttTSUmJrntDdiyhRgACZYhdj17Oh9fL5SConCMzEdGuPCe6Qp9rzdFKROf/CC0YBZPrErlixP12g2aUIf5YiVXv7p24VMQ7mEDf1UR5J2WqPKcjVSP53LU/AynXxRKI5lm+R/9QQLkboY/TIgI9VuiVgeew4/lK58n2Qrfch5EhYxpkoEARTumt9gMergEEHofg8zl87+nxsMfYvdc= yunarta@LegionFunF
+
+chpasswd:
+  expire: false
+  users:
+    - { name: root, password: root, type: text }
+
+timezone: Asia/Singapore
+

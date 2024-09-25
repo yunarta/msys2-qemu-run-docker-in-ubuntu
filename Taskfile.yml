@@ -1,0 +1,25 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  setup:
+    dir: 01-setup
+    cmds:
+      - cp ../jammy-server-cloudimg-amd64-disk-kvm.img ubuntu.qcow2
+      - qemu-img resize ubuntu.qcow2 +40G
+      - xorrisofs -output  cloud-init.qcow2 -volid cidata -rational-rock -joliet user-data meta-data
+      - |
+        qemu-system-x86_64 -m 2048 -net nic \
+        -netdev user,id=net0,hostfwd=tcp::2222-:22 \
+        -device virtio-net-pci,netdev=net0 \
+        -enable-kvm \
+        -smp cores=4 \
+        -drive file=ubuntu.qcow2,if=virtio,index=0,format=qcow2,media=disk \
+        -drive file=cloud-init.qcow2,if=virtio,index=1,media=cdrom \
+        -machine q35,accel=whpx
+
+    
