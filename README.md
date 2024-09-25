@@ -10,7 +10,7 @@ Ubuntu KVM Image
 
 
 Visual Studio Terminal Integration
-
+```
 "MSYS2 UCRT": {
     "path": "cmd.exe",
     "args": [
@@ -18,3 +18,4 @@ Visual Studio Terminal Integration
         "C:\\msys64\\msys2_shell.cmd -defterm -here -no-start -ucrt64"
     ]
 },
+```
