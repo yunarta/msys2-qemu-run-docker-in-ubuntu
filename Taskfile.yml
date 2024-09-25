@@ -13,13 +13,17 @@ tasks:
       - qemu-img resize ubuntu.qcow2 +40G
       - xorrisofs -output  cloud-init.qcow2 -volid cidata -rational-rock -joliet user-data meta-data
       - |
-        qemu-system-x86_64 -m 2048 -net nic \
+        qemu-system-x86_64 -m 16384 -net nic \
         -netdev user,id=net0,hostfwd=tcp::2222-:22 \
         -device virtio-net-pci,netdev=net0 \
-        -enable-kvm \
-        -smp cores=4 \
+        -smp cores=4,cpus=4,maxcpus=16 \
+        -device virtio-gpu-pci \
+        -device virtio-balloon-pci \
         -drive file=ubuntu.qcow2,if=virtio,index=0,format=qcow2,media=disk \
         -drive file=cloud-init.qcow2,if=virtio,index=1,media=cdrom \
-        -machine q35,accel=whpx
+        -machine q35 \
+        -accel accel=whpx \
+        -cpu EPYC-v1 \
+        -display gtk
 
     
